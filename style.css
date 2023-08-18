@@ -1,0 +1,34 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: inherit;
+}
+ 
+html {
+  box-sizing: border-box;
+  background-image: linear-gradient(rgba(18, 19, 18, 0.2), rgba(124, 201, 114, 0.463));
+  color: #282828;
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+main {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 70rem;
+  height: 40rem;
+	border-radius: 4px;
+  background-color: rgba(248, 248, 248, 0.298);
+}
+
+.section {
+	display: flex;
+	padding: 9rem;
+	flex: 50%;
+}
