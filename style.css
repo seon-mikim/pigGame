@@ -1,12 +1,24 @@
+@font-face {
+    font-family: 'IAMAPLAYER';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-2@1.0/IAMAPLAYER.woff2') format('woff2');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: inherit;
+	font-family: 'IAMAPLAYER';
 }
- 
+
 html {
   box-sizing: border-box;
-  background-image: linear-gradient(rgba(18, 19, 18, 0.2), rgba(124, 201, 114, 0.463));
+  background-image: linear-gradient(
+    rgba(18, 19, 18, 0.2),
+    rgba(124, 201, 114, 0.463)
+  );
   color: #282828;
 }
 
@@ -21,14 +33,56 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  width: 70rem;
-  height: 40rem;
-	border-radius: 4px;
+  width: 65rem;
+  height: 38rem;
+  border-radius: 4px;
   background-color: rgba(248, 248, 248, 0.298);
 }
 
-.section {
-	display: flex;
-	padding: 9rem;
-	flex: 50%;
+.player {
+  display: flex;
+	align-items: center;
+	justify-content: center;
+  padding: 4rem;
+	height: 38rem;
+  flex: 50%;
+}
+
+.player--active {
+	border-radius: 0.25rem 0 0 0.25rem;
+	background-color:rgba(248, 248, 248, 0.556);
+}
+
+.info .item:nth-child(2) {
+	margin-top: 1rem;
+}
+
+.info .item:last-child {
+  margin-top: 12rem;
+  font-size: 2rem;
+	color: #eee5e5;
+	padding: 1rem 3rem;
+	border-radius: 4px;
+  background-color: rgb(83, 182, 134);
+}
+
+.item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.name {
+  font-size: 3rem;
+}
+
+.score {
+  font-size: 4rem;
+	font-weight: 600;
+	color: rgb(83, 182, 134);
+}
+
+.current-text {
+	font-size: 1.2rem;
 }
