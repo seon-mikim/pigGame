@@ -1,20 +1,21 @@
 let playerNumber = 0;
 let accumulatedNumber = 0;
 let playerSection = document.querySelector(`.player-${playerNumber}`);
-let playerName = document.querySelector(`.item__name--${playerNumber}`);
 
 const score = [0, 0];
-const firstTotalSpan = document.querySelector('.inner__total--0');
-const secondTotalSpan = document.querySelector('.inner__total--1');
-const rollDiceButton = document.querySelector('.roll-dice--button');
-const newGameButton = document.querySelector('.new-game--button');
-const holdButton = document.querySelector('.hold--button');
-const diceImg = document.querySelector('.dice-img');
+
 const firstScore = document.querySelector('.item__score--0');
 const secondScore = document.querySelector('.item__score--1');
-const modal = document.querySelector('.modal');
+const firstTotalSpan = document.querySelector('.inner__total--0');
+const secondTotalSpan = document.querySelector('.inner__total--1');
+
+const holdButton = document.querySelector('.hold--button');
+const newGameButton = document.querySelector('.new-game--button');
+const rollDiceButton = document.querySelector('.roll-dice--button');
 const gameOverButton = document.querySelector('.modal__content--button');
-const modalText = document.querySelector('.text');
+
+const diceImg = document.querySelector('.dice-img');
+const modal = document.querySelector('.modal');
 
 const makeRandomNumber = (min, max) => {
   min = Math.ceil(min);
@@ -23,10 +24,15 @@ const makeRandomNumber = (min, max) => {
 };
 
 const gameOver = () => {
+  const modalText = document.querySelector('.text');
   if (score[0] >= 50 || score[1] >= 50) {
-    const winnerPlayer = playerName.innerText;
-    modal.classList.remove('modal--hidden');
-    modalText.innerText = ` Winner ${winnerPlayer}🎉🎉`;
+    if (score[0] > score[1]) {
+      modalText.innerText = ` Winner PLAYER${score.length-1}🎉🎉`;
+		}
+		else if (score[0] < score[1]) {
+      modalText.innerText = ` Winner PLAYER${score.length}🎉🎉`;
+		}
+		modal.classList.remove('modal--hidden');
   }
 };
 
@@ -77,20 +83,16 @@ const changePlayer = () => {
   if (playerNumber === 0) {
     playerSection.classList.remove('player--active');
     playerNumber = 1;
-    playerName = document.querySelector(`.item__name--${playerNumber}`);
     playerSection = document.querySelector(`.player-${playerNumber}`);
     playerSection.classList.add('player--active');
   } else if (playerNumber === 1) {
     playerSection.classList.remove('player--active');
-		playerNumber = 0;
-		playerName = document.querySelector(`.item__name--${playerNumber}`);
+    playerNumber = 0;
     playerSection = document.querySelector(`.player-${playerNumber}`);
     playerSection.classList.add('player--active');
   }
   accumulatedNumber = 0;
 };
-
-
 
 const getCurrentTotal = (diceCount) => {
   if (playerNumber === 0) {
