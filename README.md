@@ -11,6 +11,8 @@
 프로젝트 기간 
 - 2023.08.19~8.20
 
+사이트 배포 주소 
+[pig game](https://spiffy-heliotrope-adcd36.netlify.app/)
 
 디렉토리 구조  
 ```
