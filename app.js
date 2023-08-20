@@ -16,40 +16,27 @@ const modal = document.querySelector('.modal');
 const gameOverButton = document.querySelector('.modal__content--button');
 const modalText = document.querySelector('.text');
 
-
-
-
-
 const makeRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-const gameOver = () => {
-  
-  if (score[0] >= 50 || score[1] >= 50) {
-    const winnerPlayer = playerName.innerText;
-    modal.classList.remove('modal--hidden');
-    modalText.innerText = ` Winner ${winnerPlayer}🎉🎉`;
-  }
-};
-
 const holdGame = () => {
-	if (score[0] <= 50) {
-		score[0] += Number(firstTotalSpan.innerText);
+  if (score[0] <= 50) {
+    score[0] += Number(firstTotalSpan.innerText);
     firstScore.innerText = score[0];
   }
   if (score[1] <= 50) {
-		score[1] += Number(secondTotalSpan.innerText);
+    score[1] += Number(secondTotalSpan.innerText);
     secondScore.innerText = score[1];
   }
   changePlayer();
-	gameOver()
+  gameOver();
 };
 
 const newGame = () => {
-	 modal.classList.add('modal--hidden');
+  modal.classList.add('modal--hidden');
   diceImg.classList.add('dice-img--hidden');
   firstTotalSpan.innerText = 0;
   secondTotalSpan.innerText = 0;
@@ -66,11 +53,11 @@ const rollDice = () => {
   diceImg.classList.remove('dice-img--hidden');
   diceImg.src = `dice-${diceCount}.png`;
 
-	getCurrentTotal(diceCount);
+  getCurrentTotal(diceCount);
   if (isActive && diceCount <= 2) {
-		changePlayer();
-	}
-	gameOver();
+    changePlayer();
+  }
+  gameOver();
 };
 
 const checkActivePlayer = () => {
@@ -82,15 +69,25 @@ const changePlayer = () => {
   if (playerNumber === 0) {
     playerSection.classList.remove('player--active');
     playerNumber = 1;
+    playerName = document.querySelector(`.item__name--${playerNumber}`);
     playerSection = document.querySelector(`.player-${playerNumber}`);
     playerSection.classList.add('player--active');
   } else if (playerNumber === 1) {
     playerSection.classList.remove('player--active');
-    playerNumber = 0;
+		playerNumber = 0;
+		playerName = document.querySelector(`.item__name--${playerNumber}`);
     playerSection = document.querySelector(`.player-${playerNumber}`);
     playerSection.classList.add('player--active');
   }
   accumulatedNumber = 0;
+};
+
+const gameOver = () => {
+  if (score[0] >= 50 || score[1] >= 50) {
+    const winnerPlayer = playerName.innerText;
+    modal.classList.remove('modal--hidden');
+    modalText.innerText = ` Winner ${winnerPlayer}🎉🎉`;
+  }
 };
 
 const getCurrentTotal = (diceCount) => {
@@ -110,12 +107,11 @@ const handleClick = (event) => {
   const buttonClassName = classList[1];
   if (buttonClassName === 'roll-dice--button') return rollDice();
   if (buttonClassName === 'new-game--button') return newGame();
-	if (buttonClassName === 'hold--button') return holdGame();
-	if(buttonClassName ==='modal__content--button') return newGame()
+  if (buttonClassName === 'hold--button') return holdGame();
+  if (buttonClassName === 'modal__content--button') return newGame();
 };
 
-
-gameOverButton.addEventListener('click', handleClick)
+gameOverButton.addEventListener('click', handleClick);
 rollDiceButton.addEventListener('click', handleClick);
 newGameButton.addEventListener('click', handleClick);
 holdButton.addEventListener('click', handleClick);
