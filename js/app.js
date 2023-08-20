@@ -69,7 +69,7 @@ const rollDice = () => {
   const isActive = checkActivePlayer();
 
   diceImg.classList.remove('dice-img--hidden');
-  diceImg.src = `dice-${diceCount}.png`;
+  diceImg.src = `/assets/dice-${diceCount}.png`;
 
   getCurrentTotal(diceCount);
   if (isActive && diceCount <= 2) {
