@@ -12,14 +12,17 @@
 - 2023.08.19~8.20
 
 사이트 배포 주소 
-[pig game](https://spiffy-heliotrope-adcd36.netlify.app/)
+- [pig game](https://spiffy-heliotrope-adcd36.netlify.app/)
 
 디렉토리 구조  
 ```
+assets
+css
+js
+.prettierrc
+LICENSE
+README.md
 index.html 
-style.css
-script.js
-
 ```
 주의 사항 
 
