@@ -17,6 +17,8 @@ const gameOverButton = document.querySelector('.modal__content--button');
 const diceImg = document.querySelector('.dice-img');
 const modal = document.querySelector('.modal');
 
+
+
 const makeRandomNumber = (min, max) => {
   min = Math.ceil(min);
   max = Math.floor(max);
@@ -33,7 +35,9 @@ const gameOver = () => {
       modalText.innerText = ` Winner PLAYER${score.length}🎉🎉`;
 		}
 		modal.classList.remove('modal--hidden');
-  }
+	}
+	rollDiceButton.removeEventListener('click', handleClick);
+  newGameButton.removeEventListener('click', handleClick);
 };
 
 const holdGame = () => {
