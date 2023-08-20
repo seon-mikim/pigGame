@@ -1,6 +1,8 @@
 let playerNumber = 0;
 let accumulatedNumber = 0;
 let playerSection = document.querySelector(`.player-${playerNumber}`);
+let playerName = document.querySelector(`.item__name--${playerNumber}`);
+
 const score = [0, 0];
 const firstTotalSpan = document.querySelector('.inner__total--0');
 const secondTotalSpan = document.querySelector('.inner__total--1');
@@ -10,6 +12,13 @@ const holdButton = document.querySelector('.hold--button');
 const diceImg = document.querySelector('.dice-img');
 const firstScore = document.querySelector('.item__score--0');
 const secondScore = document.querySelector('.item__score--1');
+const modal = document.querySelector('.modal');
+const gameOverButton = document.querySelector('.modal__content--button');
+const modalText = document.querySelector('.text');
+
+
+
+
 
 const makeRandomNumber = (min, max) => {
   min = Math.ceil(min);
@@ -17,22 +26,36 @@ const makeRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const gameOver = () => {
+  
+  if (score[0] >= 50 || score[1] >= 50) {
+    const winnerPlayer = playerName.innerText;
+    modal.classList.remove('modal--hidden');
+    modalText.innerText = ` Winner ${winnerPlayer}🎉🎉`;
+  }
+};
+
 const holdGame = () => {
-  score[0] += Number(firstTotalSpan.innerText);
-  firstScore.innerText = score[0];
-
-  score[1] += Number(secondTotalSpan.innerText);
-  secondScore.innerText = score[1];
-
+	if (score[0] <= 50) {
+		score[0] += Number(firstTotalSpan.innerText);
+    firstScore.innerText = score[0];
+  }
+  if (score[1] <= 50) {
+		score[1] += Number(secondTotalSpan.innerText);
+    secondScore.innerText = score[1];
+  }
   changePlayer();
+	gameOver()
 };
 
 const newGame = () => {
+	 modal.classList.add('modal--hidden');
   diceImg.classList.add('dice-img--hidden');
   firstTotalSpan.innerText = 0;
   secondTotalSpan.innerText = 0;
   firstScore.innerText = 0;
-  secondScore.innerText = score[0] = 0;
+  secondScore.innerText = 0;
+  score[0] = 0;
   score[1] = 0;
 };
 
@@ -43,10 +66,11 @@ const rollDice = () => {
   diceImg.classList.remove('dice-img--hidden');
   diceImg.src = `dice-${diceCount}.png`;
 
-  getCurrentTotal(diceCount);
+	getCurrentTotal(diceCount);
   if (isActive && diceCount <= 2) {
-    changePlayer();
-  }
+		changePlayer();
+	}
+	gameOver();
 };
 
 const checkActivePlayer = () => {
@@ -86,9 +110,12 @@ const handleClick = (event) => {
   const buttonClassName = classList[1];
   if (buttonClassName === 'roll-dice--button') return rollDice();
   if (buttonClassName === 'new-game--button') return newGame();
-  if (buttonClassName === 'hold--button') return holdGame();
+	if (buttonClassName === 'hold--button') return holdGame();
+	if(buttonClassName ==='modal__content--button') return newGame()
 };
 
+
+gameOverButton.addEventListener('click', handleClick)
 rollDiceButton.addEventListener('click', handleClick);
 newGameButton.addEventListener('click', handleClick);
 holdButton.addEventListener('click', handleClick);
