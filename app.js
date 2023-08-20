@@ -22,6 +22,14 @@ const makeRandomNumber = (min, max) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
+const gameOver = () => {
+  if (score[0] >= 50 || score[1] >= 50) {
+    const winnerPlayer = playerName.innerText;
+    modal.classList.remove('modal--hidden');
+    modalText.innerText = ` Winner ${winnerPlayer}🎉🎉`;
+  }
+};
+
 const holdGame = () => {
   if (score[0] <= 50) {
     score[0] += Number(firstTotalSpan.innerText);
@@ -82,13 +90,7 @@ const changePlayer = () => {
   accumulatedNumber = 0;
 };
 
-const gameOver = () => {
-  if (score[0] >= 50 || score[1] >= 50) {
-    const winnerPlayer = playerName.innerText;
-    modal.classList.remove('modal--hidden');
-    modalText.innerText = ` Winner ${winnerPlayer}🎉🎉`;
-  }
-};
+
 
 const getCurrentTotal = (diceCount) => {
   if (playerNumber === 0) {
